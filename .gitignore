@@ -1,5 +1,6 @@
 # Project specific
 app.db
+certs/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
