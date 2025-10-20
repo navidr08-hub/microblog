@@ -34,3 +34,10 @@ Microblog App by Miguel Grinberg
 ### I need to document all these changes in the end
 
 ### Then I need to document how to pull down my repo and get a running and functioning app from scratch
+
+
+### TODO:
+ - Finish the automate_boring_stuff
+ - Finish testing and debiugging app deployment
+ - Complete deploying with docker
+ - Complete rest of the features
