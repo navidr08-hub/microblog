@@ -1,6 +1,7 @@
 # Project specific
 app.db
 certs/
+docker_run.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
