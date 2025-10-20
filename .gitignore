@@ -1,4 +1,5 @@
 # Project specific
+logs/
 app.db
 certs/
 docker_run.sh
