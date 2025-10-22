@@ -1,7 +1,7 @@
 FROM python:3.10-slim
 
 # Set working directory inside the container
-WORKDIR /app
+WORKDIR /microblog
 
 # Copy and install dependencies first (for layer caching)
 COPY requirements.txt .
