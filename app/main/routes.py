@@ -67,6 +67,14 @@ def explore():
                            prev_url=prev_url)
 
 
+@bp.route('/user/<username>/popup')
+@login_required
+def user_popup(username):
+    user = db.first_or_404(sa.select(User).where(User.username == username))
+    form = EmptyForm()
+    return render_template('user_popup.html', user=user, form=form)
+
+
 @bp.route('/user/<username>')
 @login_required
 def user(username):
