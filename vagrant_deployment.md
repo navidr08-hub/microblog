@@ -11,7 +11,7 @@ If you wish to use VirtualBox on Windows, you must ensure that Hyper-V is not en
 
 `Disable-WindowsOptionalFeature -Online -FeatureName Microsoft-Hyper-V-All`
 
-For Windows 11, you can use an elevated Powershell.
+For Windows 10, you can use an elevated Powershell.
 
 `bcdedit /set hypervisorlaunchtype off`
 
@@ -163,17 +163,19 @@ pip install -r requirements.txt
 
 4. Create the `.env` file for environment variables, it should have the following template:
 ```
-SECRET_KEY=
-MAIL_SERVER=
-MAIL_PORT=
-MAIL_USE_TLS=
-MAIL_PASSWORD=
-DATABASE_URL=
-MS_TRANSLATOR_KEY=
-MS_TRANSLATOR_REGION=
-# ELASTICSEARCH_URL=
+SECRET_KEY=<secret-key>
+MAIL_SERVER=smtp.googlemail.com
+MAIL_PORT=587
+MAIL_USE_TLS=1
+MAIL_USERNAME=<email>
+MAIL_PASSWORD=<password>
+DATABASE_URL=mysql+pymysql://microblog:<db-password>@localhost:3306/microblog
+REDIS_URL=redis://127.0.0.1:6379/0
+MS_TRANSLATOR_KEY=<translator-key>
+MS_TRANSLATOR_REGION=<translator-region>
+# ELASTICSEARCH_URL=http://localhost:9200
 ```
-You generate a secret key in the terminal with the command:
+You can generate a secret key in the terminal with the command:
 `python3 -c "import uuid; print(uuid.uuid4().hex)"`
 
 5. Compile language translations:
@@ -193,7 +195,7 @@ quit;
 2. Run database migrations:
 `flask db upgrade`
 
-## Set up Gunicorn and Supervisor
+## Set up Gunicorn, Redis and Supervisor
 1. Start editing the supervisor config file with:
 `sudo nano /etc/supervisor/conf.d/microblog.conf`
 
@@ -213,8 +215,30 @@ environment=PATH="/home/vagrant/microblog/venv/bin",HOME="/home/vagrant"
 ```
 Then save and close the file with `Ctrl+O`,`Enter`,`Ctrl+X`.
 
-3. Finally reload the supervisor service:
-`sudo supervisorctl reload`
+3. Start editing the supervisor config file with:
+`sudo nano /etc/supervisor/conf.d/microblog-tasks.conf`
+
+4. Paste the following content into the file:
+```
+[program:microblog-tasks-%(process_num)s]
+command=/home/vagrant/microblog/venv/bin/rq worker microblog-tasks
+directory=/home/vagrant/microblog
+autostart=true
+autorestart=true
+stderr_logfile=/var/log/microblog_tasks-%(process_num)s.err.log
+stdout_logfile=/var/log/microblog_tasks-%(process_num)s.out.log
+user=vagrant
+numprocs=2
+process_name=%(program_name)s_%(process_num)s
+```
+Then save and close the file with `Ctrl+O`,`Enter`,`Ctrl+X`.
+
+5. Finally reload the supervisor service:
+```
+sudo supervisorctl reread
+sudo supervisorctl update
+sudo supervisorctl reload
+```
 
 ## Set up Nginx
 1. Create the self-signed SSL certificate:
@@ -317,7 +341,7 @@ All deployment steps are complete, all thats left is to test the application, to
 
 - User login ... Done
 
-- Password Reset ...
+- Password Reset ... Done
 
 2. Test Posts and Profile
 - Post something ... Done
@@ -325,4 +349,4 @@ All deployment steps are complete, all thats left is to test the application, to
 - Change about me in Profile ... Done
 - Change username ... Done
 
-3. Test Explore ...
+3. Test Explore ... Done
