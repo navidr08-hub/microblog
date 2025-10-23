@@ -16,6 +16,7 @@ class Config:
     MS_TRANSLATOR_KEY = os.getenv("MS_TRANSLATOR_KEY")
     MS_TRANSLATOR_REGION = os.getenv('MS_TRANSLATOR_REGION')
     ELASTICSEARCH_URL = os.getenv('ELASTICSEARCH_URL')
+    REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'
     LANGUAGES = ['en', 'es']
     ADMINS = ['abdurrahmant507@gmail.com', 'navidrahman5@gmail.com']
     POSTS_PER_PAGE = 25
