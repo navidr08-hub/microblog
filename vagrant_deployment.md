@@ -167,8 +167,8 @@ SECRET_KEY=<secret-key>
 MAIL_SERVER=smtp.googlemail.com
 MAIL_PORT=587
 MAIL_USE_TLS=1
-MAIL_USERNAME=<email>
-MAIL_PASSWORD=<password>
+MAIL_USERNAME=<your-email>
+MAIL_PASSWORD=<app-password>
 DATABASE_URL=mysql+pymysql://microblog:<db-password>@localhost:3306/microblog
 REDIS_URL=redis://127.0.0.1:6379/0
 MS_TRANSLATOR_KEY=<translator-key>
@@ -331,22 +331,4 @@ sudo service nginx reload
 ```
 
 ## Test the Application
-
 All deployment steps are complete, all thats left is to test the application, to verify functionality.
-
-1. Test Authentication
-- User Registration
- - Create basic user in regular use case ... Done
- - Enter problematic text in fields ... 
-
-- User login ... Done
-
-- Password Reset ... Done
-
-2. Test Posts and Profile
-- Post something ... Done
-- Translate a post ... Done
-- Change about me in Profile ... Done
-- Change username ... Done
-
-3. Test Explore ... Done

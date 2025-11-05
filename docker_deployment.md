@@ -44,20 +44,3 @@ https://docs.docker.com/desktop/setup/install/windows-install/
 
 ## Test Application
 All deployment steps are complete, all thats left is to test the application, to verify functionality.
-
-1. Test Authentication
-- User Registration
- - Create basic user in regular use case ... Done
- - Enter problematic text in fields ... 
-
-- User login ... Done
-
-- Password Reset ... Done
-
-2. Test Posts and Profile
-- Post something ... Done
-- Translate a post ... Done
-- Change about me in Profile ... Done
-- Change username ... Done
-
-3. Test Explore ... Done
