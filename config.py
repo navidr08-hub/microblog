@@ -6,7 +6,8 @@ load_dotenv(os.path.join(basedir, '.env'))
 
 class Config:
     SECRET_KEY = os.getenv("SECRET_KEY") or 'you-will-never-guess'
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or \
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL', '').replace(
+        'postgres://', 'postgresql://') or \
         'sqlite:///' + os.path.join(basedir, 'app.db')
     MAIL_SERVER = os.environ.get('MAIL_SERVER') or "localhost"
     MAIL_PORT = int(os.environ.get('MAIL_PORT') or 25)
@@ -16,6 +17,7 @@ class Config:
     MS_TRANSLATOR_KEY = os.getenv("MS_TRANSLATOR_KEY")
     MS_TRANSLATOR_REGION = os.getenv('MS_TRANSLATOR_REGION')
     ELASTICSEARCH_URL = os.getenv('ELASTICSEARCH_URL')
+    LOG_TO_STDOUT = os.environ.get('LOG_TO_STDOUT')
     REDIS_URL = os.environ.get('REDIS_URL') or 'redis://'
     LANGUAGES = ['en', 'es']
     ADMINS = ['abdurrahmant507@gmail.com', 'navidrahman5@gmail.com']
